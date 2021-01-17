@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+class_name Player
+
 const MAX_ROTATION_DEGREES = -35.0
 
 export var flap_force = -200
@@ -14,6 +16,9 @@ func start():
 func flap():
 	linear_velocity.y = flap_force
 	angular_velocity = -5.0
+
+func die():
+	pass
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("flap"):
