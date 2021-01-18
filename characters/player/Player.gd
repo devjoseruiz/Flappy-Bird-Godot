@@ -8,6 +8,10 @@ const MAX_ROTATION_DEGREES = -35.0
 
 export var flap_force = -250
 onready var animator = $AnimationPlayer
+onready var wing = $Wing
+onready var dead = $Dead
+onready var hit = $Hit
+
 var started = false
 var alive = true
 
@@ -19,11 +23,14 @@ func start():
 func flap():
 	linear_velocity.y = flap_force
 	angular_velocity = -5.0
+	wing.play()
 
 func die():
 	if not alive: return
 	alive = false
 	animator.stop()
+	hit.play()
+	dead.play()
 	emit_signal("died")
 
 func _physics_process(delta):
