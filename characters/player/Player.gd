@@ -2,11 +2,14 @@ extends RigidBody2D
 
 class_name Player
 
+signal died
+
 const MAX_ROTATION_DEGREES = -35.0
 
-export var flap_force = -200
+export var flap_force = -250
 onready var animator = $AnimationPlayer
 var started = false
+var alive = true
 
 func start():
 	gravity_scale = 5.0
@@ -18,10 +21,13 @@ func flap():
 	angular_velocity = -5.0
 
 func die():
-	pass
+	if not alive: return
+	alive = false
+	animator.stop()
+	emit_signal("died")
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("flap"):
+	if Input.is_action_just_pressed("flap") && alive:
 		if not started:
 			start()
 		flap()
@@ -35,3 +41,7 @@ func _physics_process(delta):
 			angular_velocity = 2
 		else:
 			angular_velocity = 0
+	
+	for body in get_colliding_bodies():
+		if body.get_name() == "Ground":
+			die()
