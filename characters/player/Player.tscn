@@ -69,4 +69,3 @@ shape = SubResource( 1 )
 autoplay = "idle"
 anims/flap = SubResource( 2 )
 anims/idle = SubResource( 3 )
-[connection signal="died" from="." to="." method="_on_Player_died"]
