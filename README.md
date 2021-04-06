@@ -2,6 +2,10 @@
 
 Flappy Bird clone made with Godot Engine.
 
+# Demo
+
+There is a demo available deployed on Netlify: https://flappy-bird-godot.netlify.app/
+
 ## Dependencies
 
 - Godot Engine version 3.2.3
